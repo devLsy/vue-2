@@ -35,7 +35,6 @@
 
 import data from './assets/data.js';
 import axios from 'axios';
-axios;
 
 export default {
   name: 'App',
@@ -44,12 +43,9 @@ export default {
       data: data,
       result: [],
     }
-  },  
-  methods: {
-    getUsers() {
+  },
+  mounted: function() {
       axios.get ('http://localhost:9000/api/user/addressbook')
-      // axios.get ('http://localhost:9000/api/annual')
-      // axios.get ('https://portal.renosoft.kr/api/user')
         .then(response => { 
           this.result = response.data.list;
         console.log(response.data.list);
@@ -57,7 +53,9 @@ export default {
         .catch(error => {
         console.log(error);
       })
-    }
+    console.log("page load");
+  },    
+  methods: {
   },
   components: {
     
