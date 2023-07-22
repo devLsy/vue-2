@@ -6,21 +6,19 @@
   </h2>
   <table>  
     <thead>
-      <th>순번</th>
-      <th>사원명</th>
-      <th>직급</th>
-      <th>직책</th>
-      <th>전화번호</th>
-      <th>이메일</th> 
+      <th>번호</th>
+      <th>제목</th>
+      <th>내용</th>
+      <th>작성자</th>
+      <th>등록일</th>
     </thead>    
-    <tbody v-if="result > 0">
+    <tbody v-if="result.length > 0">
       <tr v-for="item in result" :key="item.no">
         <td>{{ item.no }}</td>
-        <td>{{ item.empNm }}</td>
-        <td>{{ item.positionCd }}</td>
-        <td>{{ item.roleCd }}</td>
-        <td>{{ item.empHp }}</td>
-        <td>{{ item.empEmail }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.content }}</td>
+        <td>{{ item.userId }}</td>
+        <td>{{ item.regDate }}</td>
       </tr>   
     </tbody>
     <tbody v-else>
@@ -51,12 +49,12 @@ export default {
   },
   mounted: function() {
       // axios.get ('http://localhost:9000/api/user/addressbook')
-      axios.get ('http://localhost:9000/api/user/addressbook')
+      axios.get ('http://localhost:9090/api/board')
         .then(response => { 
           this.result = response.data.list;
         console.log(response.data.list);
       })    
-        .catch(error => {
+        .catch(error => { 
         console.log(error);
       })
     console.log("page load");
