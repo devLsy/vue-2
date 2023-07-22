@@ -4,45 +4,59 @@
       <span v-text="item"></span>
     </a>
   </h2>
-  <!-- <table>  
+  <table>  
     <thead>
-      <th>제목</th>
-      <th>이미지</th>
-    </thead>
+      <th>순번</th>
+      <th>사원명</th>
+      <th>직급</th>
+      <th>직책</th>
+      <th>전화번호</th>
+      <th>이메일</th> 
+    </thead>    
     <tbody>
-      <tr v-for="item in data" :key="item.id">
-        <td><span v-html="item.title"></span></td>
-        <td><a target="_blank" :href="item.link"><img :src="item.image" class="thumnail"></a></td>
-        <td v-text="item.subtitle" />
-        <td v-text="item.pubDate" />
-        <td v-text="item.director" />
-        <td v-text="item.actor" />
-        <td v-text="item.userRating" />
-      </tr> 
-    </tbody>
-  </table> -->
-  <ul>
-    <li v-for="item in data" :key="item">
-      <a target="_blank" :href="item.link"><img :src="item.image" class="thumnail"></a>
-    </li>
-  </ul>
+      <tr v-for="item in result" :key="item.no">
+        <td>{{ item.no }}</td>
+        <td>{{ item.empNm }}</td>
+        <td>{{ item.positionCd }}</td>
+        <td>{{ item.roleCd }}</td>
+        <td>{{ item.empHp }}</td>
+        <td>{{ item.empEmail }}</td>
+      </tr>   
+    </tbody>  
+  </table>
+
+  <div>
+  <button @click="getUsers">조회</button>
+  </div>
 
 </template>
 
 <script>
 
 import data from './assets/data.js';
-data;
+import axios from 'axios';
+axios;
 
 export default {
   name: 'App',
   data() {
     return {
       data: data,
-      menus: ['전체', '음악', '믹스', '실시간', '시트콤', 
-      '최근에 업로드된 동영상', '감상한 동영상', '새로운 맞춤 동영상'
-      ],  
-      products: ['thor', 'ironMan', 'doctor strange'],
+      result: [],
+    }
+  },  
+  methods: {
+    getUsers() {
+      axios.get ('http://localhost:9000/api/user/addressbook')
+      // axios.get ('http://localhost:9000/api/annual')
+      // axios.get ('https://portal.renosoft.kr/api/user')
+        .then(response => { 
+          this.result = response.data.list;
+        console.log(response.data.list);
+      })    
+        .catch(error => {
+        console.log(error);
+      })
     }
   },
   components: {
