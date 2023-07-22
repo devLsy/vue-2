@@ -1,7 +1,10 @@
 <template>
-  <h2 class="menu"><span>TigerTube</span></h2>
-
-  <!-- <table>
+  <h2 class="menu">
+    <a v-for="item in menus" :key="item.id" target="_blank">
+      <span v-text="item"></span>
+    </a>
+  </h2>
+  <!-- <table>  
     <thead>
       <th>제목</th>
       <th>이미지</th>
@@ -36,7 +39,9 @@ export default {
   data() {
     return {
       data: data,
-      menus: ['Home', 'Board', 'User'],  
+      menus: ['전체', '음악', '믹스', '실시간', '시트콤', 
+      '최근에 업로드된 동영상', '감상한 동영상', '새로운 맞춤 동영상'
+      ],  
       products: ['thor', 'ironMan', 'doctor strange'],
     }
   },
@@ -64,6 +69,10 @@ export default {
 .menu a, span {
   color: white;
   padding: 10px;
+}
+
+.menu span {
+  color: white;
 }
 
 .img {
