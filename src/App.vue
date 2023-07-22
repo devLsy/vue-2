@@ -1,15 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h2 class="menu"><span>TigerTube</span></h2>
+
+  <!-- <table>
+    <thead>
+      <th>제목</th>
+      <th>이미지</th>
+    </thead>
+    <tbody>
+      <tr v-for="item in data" :key="item.id">
+        <td><span v-html="item.title"></span></td>
+        <td><a target="_blank" :href="item.link"><img :src="item.image" class="thumnail"></a></td>
+        <td v-text="item.subtitle" />
+        <td v-text="item.pubDate" />
+        <td v-text="item.director" />
+        <td v-text="item.actor" />
+        <td v-text="item.userRating" />
+      </tr> 
+    </tbody>
+  </table> -->
+  <ul>
+    <li v-for="item in data" :key="item">
+      <a target="_blank" :href="item.link"><img :src="item.image" class="thumnail"></a>
+    </li>
+  </ul>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import data from './assets/data.js';
+data;
 
 export default {
   name: 'App',
+  data() {
+    return {
+      data: data,
+      menus: ['Home', 'Board', 'User'],  
+      products: ['thor', 'ironMan', 'doctor strange'],
+    }
+  },
   components: {
-    HelloWorld
+    
   }
 }
 </script>
@@ -21,6 +53,32 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+.menu {
+  background: darkslateblue;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.menu a, span {
+  color: white;
+  padding: 10px;
+}
+
+.img {
+  width: 100%;
+  margin-top: 40px;
+}
+
+img.thumnail {
+  width: 325px; height: 98px;
+}
+
+ul li {
+  list-style-type: none;
+  float: left;
+  margin-right: 20px;
+}
+
 </style>
