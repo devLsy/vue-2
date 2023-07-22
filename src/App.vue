@@ -13,7 +13,7 @@
       <th>전화번호</th>
       <th>이메일</th> 
     </thead>    
-    <tbody>
+    <tbody v-if="result > 0">
       <tr v-for="item in result" :key="item.no">
         <td>{{ item.no }}</td>
         <td>{{ item.empNm }}</td>
@@ -22,11 +22,16 @@
         <td>{{ item.empHp }}</td>
         <td>{{ item.empEmail }}</td>
       </tr>   
-    </tbody>  
+    </tbody>
+    <tbody v-else>
+      <tr>
+        <td colspan="6"><strong>데이터가 없습니다.</strong></td>
+      </tr>
+    </tbody>
   </table>
 
   <div>
-  <button @click="getUsers">조회</button>
+  <!-- <button @click="getUsers">조회</button> -->
   </div>
 
 </template>
@@ -45,6 +50,7 @@ export default {
     }
   },
   mounted: function() {
+      // axios.get ('http://localhost:9000/api/user/addressbook')
       axios.get ('http://localhost:9000/api/user/addressbook')
         .then(response => { 
           this.result = response.data.list;
@@ -64,6 +70,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
